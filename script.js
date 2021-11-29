@@ -203,24 +203,40 @@ getAreaOfTriangle = (base, height) => (height * base) / 2
 
 {
     let position = [0,0];
-    let direction = "north";
+    let direction = 360;
+    let rotate = 90;
 
     function moveForward(distance){
-        if(direction === 'north'){
-            position = distance + position;
+        if(direction === 360 || direction === 0){
+            position[0] = distance + position;
+        } else if(direction === 180){
+            position[0] = distance - position;
+        }
+        else if(direction === 270){
+                position[1] = distance + position;
         }
     }
     function moveBackward(distance){
-        position = distance - position;
+        if(direction === 360 || direction === 0){
+        position[0] = distance - position;
+        } else if(direction === 180){
+            position[0] === distance + position;
+        }
     }
     function turnLeft(){
-
+        direction = direction - rotate;
+        if(direction < 0){
+            direction = 270;
+        }
     }
     function turnRight(){
-
+        direction = direction + rotate;
+        if(direction > 360){
+            direction = 90;
+        }
     }
     function printLocation(){
-
+        console.log(`${position[0]} North ${position[1]} East`);
     }
 
 }
